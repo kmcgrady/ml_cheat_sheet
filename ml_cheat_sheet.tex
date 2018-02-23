@@ -48,7 +48,7 @@ The goal of machine learning is to (loosely) generalize information about a part
 
 \par\noindent\hangindent=1cm \textbf{Regression} A mapping of continuous inputs to outputs (ie approximating a function to produce a continuous value)\\
 
-
+\par\noindent\hangindent=1cm \textbf{Squared Error} A mapping of continuous inputs to outputs (ie approximating a function to produce a continuous value)\\
 
 \subsection{Regression and Classification}
 \begin{itemize}
@@ -140,7 +140,7 @@ Examples with missing attribute values can be handled easily in Decision Trees. 
 
 \subsubsection*{Higher Cost Attributes}
 
-The InformationGain function can be adjusted in terms of the cost of an attribute. An example here is a medical diagnosis decision tree where it may reduce the value for an invasive surgery to be less desirable though informational than say a blood test with some failure rate. Some values are described noting that they do not guarantee the optimal tree. Examples include:
+The $InformationGain$ function can be adjusted in terms of the cost of an attribute. An example here is a medical diagnosis decision tree where it may reduce the value for an invasive surgery to be less desirable though informational than say a blood test with some failure rate. Some values are described noting that they do not guarantee the optimal tree. Examples include:
 
 \begin{equation}
 \frac{Gain^2(S, A)}{Cost(A)}
@@ -154,69 +154,155 @@ where $w \in [0, 1]$ is a constant to determine the relative importance.
 
 \subsection{Neural Networks}
 
-\section{Lazy vs Eager}
+Originally motivated from Biology with the neural system, neural networks have evolved to very loosely model a series of neurons.
+
+\subsubsection{Good Problems}
+
+The reasons below are general guidelines that indicate Neural Networks are valuable. 
+
 \begin{itemize}
-\item k-NN, locally weighted regression, and case-based reasoning are lazy
-\item \textsc{BACKPROP}, RBF is eager (why?), ID3 eager
-\item Lazy algorithms may use query instance $x_q$ when deciding how to generalize (can represent as a bunch of local functions). Eager methods have already developed what they think is the global function.
+\item There are a large set of features to be learned. Examples such as pixels can help understand correlated or independent features more easily.
+\item The problem is a classification, regression, or a combination of both. Neural Networks are very versatile in this manner.
+\item An allowance of training upfront - Neural Networks require longer training times usually, especially in comparison of decision tree learning.
+\item A quick evaluation of the target function - The advantage from the upfront training is a robust and much quicker evaluation function.
+\item Training data may contain errors - Neural Networks have mechanisms to work around noisy data and errors in classification in general.
+\item Description of approximation need not need definition - in contrast to decision tree, the ability to explain ``how" the algorithm interprets the input is not needed.
 \end{itemize}
 
-\section{Neural Networks}
-\subsection{Perceptrons}
-$$o(x_1...x_n) =
+\subsubsection{Perceptrons}
+
+The base unit that are ``networked" together in a Neural Network is a Perceptron. A perceptron takes in a vector (or collection) of inputs and evaluates piecewise to a discrete set of two values (positive or negative case). Each input is weighted and it must exceed a threshold to activate or emit a positive result. In the book, positive and negative results were 1 and -1 respectively whereas the video lectures used 1 and 0 respectively. Mathematically speaking, a perceptron can be defined as follows:
+
+\begin{equation}
+o(x_1...x_n) =
     \begin{cases}
             1, &         \text{if } w_0+w_1x_1+...+w_nx_n>0,\\
             0, &         \text{otherwise}.
     \end{cases}
-$$
-where $w_0,...,w_n$ is a real-valued weight. Note that $w_0$ is a threshold that must be surpassed for the perceptron to output 1. Alternatively: $o(\vec{x}) = sgn(\vec{w}\vec{x})$. $H =\{\vec{w} | \vec{w} \in \mathbb{R}^{n+1} \}$.
+\end{equation}
 
-\subsection{Perceptron Training Rule vs Delta Rule}
+where $w_0,...,w_n$ is a real-valued weight. The videos do not include $w_0$ term, but they do introduce a threshold $\theta$. In this case $\theta = -w_0$ is a threshold that must be surpassed for the perceptron to output 1. Alternatively, we can use the $sgn$ function (outputting -1 or 1).
+
+\begin{equation}
+o(\vec{x}) = sgn(\vec{w}\vec{x}).
+\end{equation}
+
+In terms of hypothesis space, $H$, a perceptron can produce an infinite number of possibilities (equal to all possible real valued weight vectors).
+
+\begin{equation}
+H =\{\vec{w} | \vec{w} \in \mathbb{R}^{n+1} \}
+\end{equation}
+
+\subsubsection*{Logic Representation}
+
+A perceptron can be described as representing many boolean functions like AND, OR, NAND, and NOR. A single perceptron can not, however, represent XOR. This leads to the final theorem that every boolean function can be represented by some network of perceptrons, which indicates the expressiveness of these. Example representations are included in the table below.
+
+INSERT TABLE HERE
+
+\subsubsection{Implementation Details}
+
+Much of the implementation of a Neural Network requires a method of training each perceptron and setting the weights for each. One of the most effective methods to handle this is to use Gradient Descent.
+
+\subsubsection*{Perceptron Training Rule}
+
+The basic idea to train the perceptrons is to start with a random set of weights, apply it to a training datasets and update perceptron weights until it makes an error. The weights are then adjusted to work towards a valid solution. The process is iterated until the weights converge to set of values that work well on the entire training set. A weight is adjusted by adding some $\Delta$ value to it.
+
+\begin{equation}
+w_i \leftarrow w_i + \Delta w_i
+\end{equation}
+
+This adjustment can be calculated by learning a rate that moves closer to the correct classification.
+
+\begin{equation}
+\Delta w_i=\eta (t-o) x_i
+\end{equation}
+
+where $t$ is the target output for current training example (ie. the correct answer) and $o$ is the output generated for current training example (ie our wrong answer). The learning rate, represented by $\eta$ moves the weights into a direction to ensure that the weights are making smaller iterations towards the correct answer. It's usually set to some small value like $0.1$ and can be adjusted to decay as iterations increase.
+
+Convergence occurs if the data is linearly separable (ie. there exists some hyperplane that separates classifications.
+
+\subsubsection*{Delta Rule}
+
+Because datasets are not linearly separable, there exists a problem with convergence that result in the algorithm not agreeing to halt. In this case, we can employ gradient descent and the delta rule. In this case, the training will converge to a ``best fit." A linear unit is used in the beginning (ie there is no threshold value $\theta$). In order to determine the best fit, a notion of an error value needs to be defined.
+
+\begin{equation}
+E(\vec{w})=\frac{1}{2} \sum_{d \in D} (t_d - o_d)^2
+\end{equation}
+
+where $D$ is our set of training examples, $t_d$ is the target output for the training example $d$ (a classification or regression), and $o_d$ is the output for the training example $d$.
+
+Gradient descent finds a minimum by following the path of the hyperplane in the direction that points towards the minimum. Gradient Descent comes from calculus to be a vector of the partial derivative of the error with respect to each weight. The value of the gradient descent means the area where the error increases the greatest. This negation of the gradient descent therefore produces the greatest \textit{decrease} in $E$, the error. The method then follows the same process of updating the weights.
+
+\begin{equation}
+\vec{w} \leftarrow w + \Delta \vec{w}
+\end{equation}
+
+where we use the negative gradient descent to detemine the delta.
+
+\begin{equation}
+\Delta\vec{w} = -\eta \nabla E(\vec{w})
+\end{equation}
+
+where $\eta$ is the learning rate again. Separating it out for each component weight $w_i$.
+
+\begin{equation}
+\Delta w_i = -\eta \frac{\partial E}{\partial w_i}
+\end{equation}
+
+Calculation of the gradient descent is straightforward and easy to construct. To summarize, the updated change in weights per component  is:
+
+\begin{equation}
+\Delta w_i = \eta \sum_{d\in D} (t_d - o_d) x_{id}
+\end{equation}
+
+\subsubsection*{Stochastic Gradient Descent}
+
+Gradient Descent has a couple challenges:
+
 \begin{itemize}
-\item Perceptron training rule: begin with random weights, apply perceptron to each training example, update perceptron weights when it misclassifies. Iterates through training examples repeatedly until it classifies all examples correctly.
-\begin{itemize}
-\item $w_i \leftarrow w_i + \Delta w_i$
-\item $\Delta w_i=\eta (t-o) x_i$, $t$: target output for current training example. $o$:output generated for current training example. $\eta$: learning rate.
-\end{itemize}
-\item To converge, Perceptron training rule needs data to be linearly separable( Decision for this hyperplane is $\vec{w}\vec{x} >0$) and for $\eta$ to be sufficiently small.
-\item Delta rule uses \textit{gradient descent}.
-\begin{itemize}
-\item (?) task of training linear unit (1st stage of a perceptron without the threshold): $o(\vec{x}) = \vec{w}\vec{x}$
-\item training error: $E(\vec{w})=\frac{1}{2} \sum_{d \in D} (t_d - o_d)^2$, where $D$: training examples, $t_d$: target output for training example $d$, and $o_d$: output of linear unit for training example $d$.
-\item Gradient descent finds global minimum of $E$ by initializing weights, then repeatedly modifying until it hits the global min. Modification: alters in the direction that gives steepest descent. $\nabla E(\vec{w})= [\frac{\partial E}{\partial w_0},...,\frac{\partial E}{\partial w_n}]$
-\item Training rule for gradient descent: $w_i \leftarrow w_i + \Delta w_i$\\
-$\Delta \vec{w} = -\eta \nabla E(\vec{w})$
-\item Training rule can also be written in its component form: $w_i \leftarrow w_i+\Delta w_i$\\ $\Delta w_i = -\eta \frac{\partial E}{\partial w_i}$
-\item Efficient way of finding $\frac{\partial E}{\partial w_i} = \sum_{d \in D} (t_d-o_d)(-x_{id})$, where $x_{id}$ (?) represents single input component $x_i$ for training example $d$.
-\item Rewrite: $\Delta w_i = \eta \sum_{d\in D} (t_d - o_d) (x_{id})$ (true gradient descent)
-\item Problems: slow; possibly multiple local minima in error surface (?-I thought error function was smooth, and would always find the global minimum. Example why not?)
-\item (?) Stochastic gradient descent: $\Delta w_i = \eta (t-o)x_i$ (known as delta rule). Error rule: $E_d(\vec{w}) = \frac{1}{2} (t_d - o_d)^2$ (?-relationship to the other gradient descent? Why don't we need to separate it by $x_{id}$ anymore? Is this a vector?)
-\item Stochastic versus True gradient descent
-\begin{itemize}
-\item true: error summed over all examples before updating weights. stochastic: weights updated upon examining each training example
-\item summing over multiple examples require more computation per weight update step. But using true gradient, so can use a larger step size
-\item Stochastic avoids multiple local minima because it uses $\nabla E_d(\vec{w})$ not $\nabla E(\vec{w})$
-\end{itemize}
-\end{itemize}
-\item The cost function for a neural network is non-convex, so it may have multiple minima. Which minimum you find with gradient descent depends on the initialization.
+\item It does not guarantee a global minimum it can get stuck at a local minimum.
+\item It can be very slow to find that minimum requiring many iterations.
 \end{itemize}
 
-\subsection{Threshold Unit}
-Unit for multilayer networks. Want a network that can represent highly nonlinear functions. Need unit whose output is nonlinear, but the output is also differentiable function of its inputs. $o = \sigma (\vec{w} \vec{x})$ where $\sigma(y) = \frac{1}{1-e^y}$
-\subsection{\textsc{BACKPROP}}
-$$E(\vec{w}) = \frac12 \sum_{d\in D} \sum_{k \in outputs}{(t_{kd} - o_{kd})^2}$$ where outputs: set of output units in network, $t_{kd}$ target, $o_{kd}$ output associated with $k^{th}$ output unit and training example $d$. (?)\\
-{\color{red}Algorithm BACKPROP}
+A solution is to apply a \textit{stochastic gradient descent} which updates the weights following each individual training example instead of all training examples (what gradient descent did). Note the lack of the summation in the updated error equation.
+
+\begin{equation}
+E_d(\vec{w})=\frac{1}{2} (t_d - o_d)^2
+\end{equation}
+
+There are three key differences:
+
 \begin{itemize}
-\item until termination condition is met:
-\item for i = 1 to m (m is the number of training examples)
-\begin{itemize}
-\item set $a^{(1)} = x^{(i)}$ ($i^{th}$ training example)
-\item Perform forward propagation by computing $a^{(l)}$ for $l = 2,...,L$ ($L$ is total number of layers) $a^{(l)}= \sigma (w^{(l-1)}a^{(l-1)}) $ = output of the $l^{th}$ layer. 
-\item Using $y^{(i)}$ compute $\delta^{(L)} = a^{(L)} - y^{(i)}$ ($y^{(i)}$ is the target for the $i^{th}$ training example)
-\item Then calculate (??) $\delta^{(L-1)}$ up until $\delta^{(2)}$ ($\delta^{(l)}$ is the "error" of layer $l$ and $$\delta^{(l)} = w^{(l)}\delta^{(l+1)} .* \sigma'(w^{(l)} a^{(l)})$$
-\item update $w^{(l)} = w^{(l)} + \Delta w^{(l)}$ (represents a vector of the weights of layer $l$) where  $$\Delta w^{(l)} = \eta \delta^{(l)}.*x^{(l)}$$
+\item As stated before gradient descent is summed overall examples before updating weights. Stochastic gradient descent updates weights after each individual example.
+\item It can be thought that gradient descent takes into account all training examples which is computationally expensive, but they can have a larger step size as a result. Stochastic gradient descent needs a smaller descent.
+\item Although not guaranteed, stochastic gradient descent can avoid falling into a local minima because it uses different error gradients to guide the search.
 \end{itemize}
-\end{itemize}
+
+\subsubsection{Multilayer networks}
+
+Most of what we described above has been a focus on calculating weights for a single perceptron. Single perceptrons can only express linear decisions. Multilayer networks can express more complex decisions. The common method of training a multilayer network is through \textit{Backpropagation}. Multiple layers of linear units still produce linear results. Instead of the linear unit, we will use a differentiable threshold unit such as a sigmoid unit. It behaves very much like the discrete perceptron described above, but it provides a smoothed continuous curve to provide both scenarios.
+
+\begin{equation}
+o = \sigma (\vec{w} \vec{x})
+\end{equation}
+where
+\begin{equation}
+\sigma(y) = \frac{1}{1-e^y}
+\end{equation}
+
+The advantage of this scenario is that it is differentiable, which will make it easier to define the gradient descent.
+
+\subsubsection*{\textsc{Backpropagation} Algorithm}
+
+The \textsc{Backpropagation} algorithm learns the weights within a multilayer network (assuming the network is of fixed size and number of connections) through a similar gradient descent method to minimize the error. The redefined error function is below.
+
+\begin{equation}
+E(\vec{w}) = \frac12 \sum_{d\in D} \sum_{k \in outputs}{(t_{kd} - o_{kd})^2}
+\end{equation}
+
+where $outputs$ is the set of output units in the network, and $t_kd$ and $o_kd$ are the same target and output values but associated with the $k^{th}$ output unit and training example $d$. The algorithm behaves very similarly as before (feed weights to nodes, run it in the network, calculate error, and adjust weights based on gradient descent). One major difference in the algorithm is the update of weights relies on a more complex $\delta$ instead of the general error ($t-o$). The size of the network needs to be defined in order to run the algorithm, so various sizes will needed to be tested in order to identify the best output. Gradient descent will only guaranteed to converge to a local minima (but it often still produces better results).
+
+\subsubsection{Risks}
 
 \subsection{Momentum}
 $$\Delta w^{(l)}_n= \eta \delta^{(l)}.*x^{(l)} +\alpha w^{(l)} (n-1) $$\\ where $n$ is the iteration (adds a momentum $\alpha$)
@@ -243,6 +329,12 @@ What do I need to know about recurrent networks?
 \end{itemize}
 
 
+\section{Lazy vs Eager}
+\begin{itemize}
+\item k-NN, locally weighted regression, and case-based reasoning are lazy
+\item \textsc{BACKPROP}, RBF is eager (why?), ID3 eager
+\item Lazy algorithms may use query instance $x_q$ when deciding how to generalize (can represent as a bunch of local functions). Eager methods have already developed what they think is the global function.
+\end{itemize}
 \section{Instance Based Learning}
 \subsection{k-NN}
 \begin{itemize}

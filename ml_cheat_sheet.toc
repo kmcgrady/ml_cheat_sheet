@@ -8,37 +8,37 @@
 \contentsline {subsubsection}{\numberline {3.1.3}Risks}{5}{subsubsection.3.1.3}
 \contentsline {subsubsection}{\numberline {3.1.4}Variants}{5}{subsubsection.3.1.4}
 \contentsline {subsection}{\numberline {3.2}Neural Networks}{6}{subsection.3.2}
-\contentsline {section}{\numberline {4}Lazy vs Eager}{6}{section.4}
-\contentsline {section}{\numberline {5}Neural Networks}{6}{section.5}
-\contentsline {subsection}{\numberline {5.1}Perceptrons}{6}{subsection.5.1}
-\contentsline {subsection}{\numberline {5.2}Perceptron Training Rule vs Delta Rule}{7}{subsection.5.2}
-\contentsline {subsection}{\numberline {5.3}Threshold Unit}{7}{subsection.5.3}
-\contentsline {subsection}{\numberline {5.4}\textsc {BACKPROP}}{8}{subsection.5.4}
-\contentsline {subsection}{\numberline {5.5}Momentum}{8}{subsection.5.5}
-\contentsline {subparagraph}{Recurrent Networks}{8}{section*.8}
-\contentsline {subsection}{\numberline {5.6}Radial Basis Functions}{8}{subsection.5.6}
-\contentsline {section}{\numberline {6}Instance Based Learning}{9}{section.6}
-\contentsline {subsection}{\numberline {6.1}k-NN}{9}{subsection.6.1}
-\contentsline {subsection}{\numberline {6.2}Locally Weighted Linear Regression}{9}{subsection.6.2}
-\contentsline {section}{\numberline {7}Support Vector Machines}{9}{section.7}
-\contentsline {subsection}{\numberline {7.1}Kernel Induced Feature Spaces}{10}{subsection.7.1}
-\contentsline {subsection}{\numberline {7.2}Relationship between SVMs and Boosting}{10}{subsection.7.2}
-\contentsline {section}{\numberline {8}Boosting}{10}{section.8}
-\contentsline {section}{\numberline {9}Computational Learning Theory}{11}{section.9}
-\contentsline {subsection}{\numberline {9.1}Definitions}{11}{subsection.9.1}
-\contentsline {subsection}{\numberline {9.2}Haussler Theorem}{11}{subsection.9.2}
-\contentsline {subsection}{\numberline {9.3}Infinite Hypotheses Spaces}{11}{subsection.9.3}
-\contentsline {section}{\numberline {10}Bayesian Learning}{12}{section.10}
-\contentsline {subsection}{\numberline {10.1}Equations and Definitions}{12}{subsection.10.1}
-\contentsline {subparagraph}{BRUTE FORCE MAP learning algorithm}{12}{section*.9}
-\contentsline {subsection}{\numberline {10.2}ML and Least-Squared Error}{12}{subsection.10.2}
-\contentsline {subsection}{\numberline {10.3}Bayes Optimal Classifier}{13}{subsection.10.3}
-\contentsline {subsection}{\numberline {10.4}Bayesian Belief Networks}{13}{subsection.10.4}
-\contentsline {subparagraph}{Naive Bayes}{13}{section*.10}
-\contentsline {subparagraph}{EM Algorithm}{13}{section*.11}
-\contentsline {section}{\numberline {11}Evaluating Hypotheses}{13}{section.11}
-\contentsline {section}{\numberline {12}Randomized Optimization}{13}{section.12}
-\contentsline {subsection}{\numberline {12.1}MIMIC}{13}{subsection.12.1}
-\contentsline {subsection}{\numberline {12.2}Simulated Annealing}{13}{subsection.12.2}
-\contentsline {section}{\numberline {13}Information Theory}{14}{section.13}
-\contentsline {subparagraph}{Definitions}{14}{section*.12}
+\contentsline {subsubsection}{\numberline {3.2.1}Good Problems}{6}{subsubsection.3.2.1}
+\contentsline {subsubsection}{\numberline {3.2.2}Perceptrons}{7}{subsubsection.3.2.2}
+\contentsline {subsubsection}{\numberline {3.2.3}Implementation Details}{7}{subsubsection.3.2.3}
+\contentsline {subsubsection}{\numberline {3.2.4}Multilayer networks}{9}{subsubsection.3.2.4}
+\contentsline {subsubsection}{\numberline {3.2.5}Risks}{10}{subsubsection.3.2.5}
+\contentsline {subsection}{\numberline {3.3}Momentum}{10}{subsection.3.3}
+\contentsline {subparagraph}{Recurrent Networks}{10}{section*.13}
+\contentsline {subsection}{\numberline {3.4}Radial Basis Functions}{10}{subsection.3.4}
+\contentsline {section}{\numberline {4}Lazy vs Eager}{11}{section.4}
+\contentsline {section}{\numberline {5}Instance Based Learning}{11}{section.5}
+\contentsline {subsection}{\numberline {5.1}k-NN}{11}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Locally Weighted Linear Regression}{11}{subsection.5.2}
+\contentsline {section}{\numberline {6}Support Vector Machines}{11}{section.6}
+\contentsline {subsection}{\numberline {6.1}Kernel Induced Feature Spaces}{12}{subsection.6.1}
+\contentsline {subsection}{\numberline {6.2}Relationship between SVMs and Boosting}{12}{subsection.6.2}
+\contentsline {section}{\numberline {7}Boosting}{12}{section.7}
+\contentsline {section}{\numberline {8}Computational Learning Theory}{13}{section.8}
+\contentsline {subsection}{\numberline {8.1}Definitions}{13}{subsection.8.1}
+\contentsline {subsection}{\numberline {8.2}Haussler Theorem}{13}{subsection.8.2}
+\contentsline {subsection}{\numberline {8.3}Infinite Hypotheses Spaces}{13}{subsection.8.3}
+\contentsline {section}{\numberline {9}Bayesian Learning}{13}{section.9}
+\contentsline {subsection}{\numberline {9.1}Equations and Definitions}{13}{subsection.9.1}
+\contentsline {subparagraph}{BRUTE FORCE MAP learning algorithm}{14}{section*.14}
+\contentsline {subsection}{\numberline {9.2}ML and Least-Squared Error}{14}{subsection.9.2}
+\contentsline {subsection}{\numberline {9.3}Bayes Optimal Classifier}{14}{subsection.9.3}
+\contentsline {subsection}{\numberline {9.4}Bayesian Belief Networks}{15}{subsection.9.4}
+\contentsline {subparagraph}{Naive Bayes}{15}{section*.15}
+\contentsline {subparagraph}{EM Algorithm}{15}{section*.16}
+\contentsline {section}{\numberline {10}Evaluating Hypotheses}{15}{section.10}
+\contentsline {section}{\numberline {11}Randomized Optimization}{15}{section.11}
+\contentsline {subsection}{\numberline {11.1}MIMIC}{15}{subsection.11.1}
+\contentsline {subsection}{\numberline {11.2}Simulated Annealing}{15}{subsection.11.2}
+\contentsline {section}{\numberline {12}Information Theory}{16}{section.12}
+\contentsline {subparagraph}{Definitions}{16}{section*.17}

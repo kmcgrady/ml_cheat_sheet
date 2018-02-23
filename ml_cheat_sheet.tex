@@ -38,9 +38,28 @@ The goal of machine learning is to (loosely) generalize information about a part
 
 \section{Key Terms}
 
-\textbf{Overfitting} Essentially tuning your algorithm too closely to your training dataset that it does worse in general on the testing set. Mathematically speaking, suppose we took the set of all the possible hypotheses that could explain the data $H$, and we propose a hypothesis $h$. If there's an alternate hypothesis (let's call it $h'$) that performs better on the test data (ie has a smaller error), our hypothesis is said to overfit. This can be the case even if our hypothesis performs better on our training set.
+\par\noindent\hangindent=1cm \textbf{Classification} A mapping of inputs to a discrete label\\
 
-\textbf{Inductive Bias} Set of assumptions that, when combined with the training data, describe the classifications assigned by the learner to future data instances.
+\par\noindent\hangindent=1cm \textbf{Cross Validation} Dividing the training sets randomly into a smaller training set and a validation set, running training on the smaller testing set and run it on the validation set. Applying this multiple times can increase potential accuracy on the final test set\\
+
+\par\noindent\hangindent=1cm \textbf{Inductive Bias} Set of assumptions that, when combined with the training data, describe the classifications assigned by the learner to future data instances.\\
+
+\par\noindent\hangindent=1cm \textbf{Overfitting} Essentially tuning your algorithm too closely to your training dataset that it does worse in general on the testing set. Mathematically speaking, suppose we took the set of all the possible hypotheses that could explain the data $H$, and we propose a hypothesis $h$. If there's an alternate hypothesis (let's call it $h'$) that performs better on the test data (ie has a smaller error), our hypothesis is said to overfit. This can be the case even if our hypothesis performs better on our training set.\\
+
+\par\noindent\hangindent=1cm \textbf{Regression} A mapping of continuous inputs to outputs (ie approximating a function to produce a continuous value)\\
+
+
+
+\subsection{Regression and Classification}
+\begin{itemize}
+\item Least squared error:The objective consists of adjusting the parameters of a model function to best fit a data set. A simple data set consists of n points (data pairs) $(x_i,y_i)$, i = 1, ..., n, where $x_i$ is an independent variable and $y_i$ is a dependent variable whose value is found by observation. The model function has the form $f(x,\beta)$, where the m adjustable parameters are held in the vector $\boldsymbol \beta$. The goal is to find the parameter values for the model which "best" fits the data. The least squares method finds its optimum when the sum, S, of squared residuals
+
+$S=\sum_{i=1}^{n}{r_i}^2$
+is a minimum. A residual is defined as the difference between the actual value of the dependent variable and the value predicted by the model.
+
+$r_i=y_i-f(x_i,\boldsymbol \beta)$
+An example of a model is that of the straight line in two dimensions. Denoting the intercept as $\beta_0$ and the slope as $\beta_1$, the model function is given by $f(x,\boldsymbol \beta)=\beta_0+\beta_1 x$.
+\end{itemize}
 
 \section{Supervised Learning}
 
@@ -133,28 +152,13 @@ The InformationGain function can be adjusted in terms of the cost of an attribut
 
 where $w \in [0, 1]$ is a constant to determine the relative importance.
 
+\subsection{Neural Networks}
+
 \section{Lazy vs Eager}
 \begin{itemize}
 \item k-NN, locally weighted regression, and case-based reasoning are lazy
 \item \textsc{BACKPROP}, RBF is eager (why?), ID3 eager
 \item Lazy algorithms may use query instance $x_q$ when deciding how to generalize (can represent as a bunch of local functions). Eager methods have already developed what they think is the global function.
-\end{itemize}
-
-\subsection{Adapting Decision Trees to Regression(?)}
-\begin{itemize}
-\item splitting criteria: variance
-\item leaves: average local linear fit
-\end{itemize}
-
-\section{Regression and Classification}
-\begin{itemize}
-\item Least squared error:The objective consists of adjusting the parameters of a model function to best fit a data set. A simple data set consists of n points (data pairs) $(x_i,y_i)$, i = 1, ..., n, where $x_i$ is an independent variable and $y_i$ is a dependent variable whose value is found by observation. The model function has the form $f(x,\beta)$, where the m adjustable parameters are held in the vector $\boldsymbol \beta$. The goal is to find the parameter values for the model which "best" fits the data. The least squares method finds its optimum when the sum, S, of squared residuals
-
-$S=\sum_{i=1}^{n}{r_i}^2$
-is a minimum. A residual is defined as the difference between the actual value of the dependent variable and the value predicted by the model.
-
-$r_i=y_i-f(x_i,\boldsymbol \beta)$
-An example of a model is that of the straight line in two dimensions. Denoting the intercept as $\beta_0$ and the slope as $\beta_1$, the model function is given by $f(x,\boldsymbol \beta)=\beta_0+\beta_1 x$.
 \end{itemize}
 
 \section{Neural Networks}

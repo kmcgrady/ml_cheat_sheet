@@ -1,5 +1,5 @@
 % You should title the file with a .tex extension (hw1.tex, for example)
-\documentclass[11pt]{article}
+\documentclass[titlepage,11pt]{article}
 
 \usepackage{mathtools}
 \usepackage{amssymb}
@@ -15,11 +15,14 @@
 \topmargin-2cm     %I recommend adding these three lines to increase the 
 \textwidth16.5cm   %amount of usable space on the page (and save trees)
 \textheight23.5cm  
-
-
+\usepackage{blindtext}
+\title{Machine Learning Summary}
+\date{February 2018}
+\author{Ken McGrady}
 
 
 \begin{document}
+\maketitle
 \tableofcontents
 
 \clearpage
@@ -302,16 +305,20 @@ E(\vec{w}) = \frac12 \sum_{d\in D} \sum_{k \in outputs}{(t_{kd} - o_{kd})^2}
 
 where $outputs$ is the set of output units in the network, and $t_kd$ and $o_kd$ are the same target and output values but associated with the $k^{th}$ output unit and training example $d$. The algorithm behaves very similarly as before (feed weights to nodes, run it in the network, calculate error, and adjust weights based on gradient descent). One major difference in the algorithm is the update of weights relies on a more complex $\delta$ instead of the general error ($t-o$). The size of the network needs to be defined in order to run the algorithm, so various sizes will needed to be tested in order to identify the best output. Gradient descent will only guaranteed to converge to a local minima (but it often still produces better results).
 
+\subsubsection{Variants}
+
+The most common variation of \textsc{Backpropagation} is to make the weight updates partially on the previous iteration based on some value $0 \leq \alpha < 1$ the value of $alpha$ is described as the \textit{momentum}.
+
+\begin{equation}
+\Delta w_{ji}(n)= \eta \delta_jx_{ji} +\alpha \Delta w_{ji} (n-1)
+\end{equation}
+
+The momentum term can be helpful in increasing convergence speed as well as potentially pass local minima to a potentially global minimum.
+
 \subsubsection{Risks}
 
-\subsection{Momentum}
-$$\Delta w^{(l)}_n= \eta \delta^{(l)}.*x^{(l)} +\alpha w^{(l)} (n-1) $$\\ where $n$ is the iteration (adds a momentum $\alpha$)
 \begin{itemize}
-\item $E_d(\vec{w}) = \frac12 \sum_{k\in outputs}{(t_k - o_k)^2}$ error on training example $d$
-\item How to derive the \textsc{BACKPROP} rule??
-\item \textsc{BACKPROP} for multi-layer networks may converge only at a local minimum (because error surface for multi-layer networks may contain many different minima).
-\item Alternative Error Functions?
-\item Alternative Error Minimization Procedures
+\item Be wary of the number of iterations to converge. Too many iterations on \textsc{Backpropagation} can lead to overfitting whereas too little iterations can lead to a bad error.
 \end{itemize}
 
 \subparagraph{Recurrent Networks}
